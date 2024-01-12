@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service
+  namespace: devops-infra
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path:   /
+      prometheus.io/port:   '8080'
+spec:
+  
+  type: LoadBalancer
+  selector:
+    app: jenkins-server
+  ports:
+    - port: 80
+      targetPort: 8080  # The port on which your application is running inside the pods
+  
